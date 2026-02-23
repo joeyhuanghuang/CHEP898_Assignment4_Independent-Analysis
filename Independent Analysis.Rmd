@@ -132,8 +132,80 @@ library(performance)
 library(utils)
 library(see)
 library(forestmodel)
-data_canpath<-read.csv("/Users/xiehuangbao/Library/CloudStorage/OneDrive-UniversityofSaskatchewan/Study at USask/CHEP898_Machine Learning/Assignment/Final assignment/CHEP898_Assignment4_Independent-Analysis/CarPrice_Assignment.csv")
+data_carprice<-read.csv("/Users/xiehuangbao/Library/CloudStorage/OneDrive-UniversityofSaskatchewan/Study at USask/CHEP898_Machine Learning/Assignment/Final assignment/CHEP898_Assignment4_Independent-Analysis/CarPrice_Assignment.csv")
 ```
+
+```{r}
+glimpse(data_carprice)
+```
+
+There are 26 columns, including ID and other 25 variables.      
+
+The total sample size is 205.     
+
+
+```{r}
+sum(duplicated(data_carprice))
+```
+There is no duplicated data existed in this dataset. 
+
+**Identify the candidates of continuous variables: **     
+- 1 output variable: car price (continuous)     
+- 24 input variables (11 categorical variables + 13 continuous variables)   
+**Categorical variables:**        
+insurance risk rating   
+Name of car company (Categorical)		    
+Car fuel type i.e gas or diesel (Categorical)		  
+Aspiration used in a car (Categorical)		
+Number of doors in a car (Categorical)		
+body of car (Categorical)		  
+type of drive wheel (Categorical)       		
+Location of car engine (Categorical)      
+Type of engine. (Categorical)		    
+cylinder placed in the car (Categorical)      
+Fuel system of car (Categorical)    
+**Continuouis variables:**    
+Weelbase of car (Numeric)	  	  
+Length of car (Numeric)		    
+Width of car (Numeric)		    
+height of car (Numeric)		  
+The weight of a car without occupants or baggage. (Numeric)     		  
+Size of car (Numeric)	      
+Boreratio of car (Numeric)	  	    
+Stroke or volume inside the engine (Numeric)      		
+compression ratio of car (Numeric)		  
+Horsepower (Numeric)		  
+car peak rpm (Numeric)		  
+Mileage in city (Numeric)		    
+Mileage on highway (Numeric)		    
+
+```{r}
+rm_covsum(data=data_carprice,
+covs = c('symboling', 'CarName', 'fueltype', 'aspiration', 'doornumber', 'carbody', 'drivewheel', 'enginelocation', 'enginetype', 'cylindernumber', 'fuelsystem', 
+         'wheelbase', 'carlength', 'carwidth', 'carheight', 'curbweight', 'enginesize', 'boreratio', 'stroke', 'compressionratio', 'horsepower', 'peakrpm', 'citympg', 'highwaympg', 'price'))
+```
+
+  
+There is not missing data.
+
+```{r}
+### The categorical variables were changed to factor.   
+data_carprice$symboling <- as.factor(data_carprice$symboling)
+data_carprice$CarName <- as.factor(data_carprice$CarName)
+data_carprice$fueltype <- as.factor(data_carprice$fueltype)
+data_carprice$aspiration <- as.factor(data_carprice$aspiration)
+data_carprice$doornumber <- as.factor(data_carprice$doornumber)
+data_carprice$carbody <- as.factor(data_carprice$carbody)
+data_carprice$drivewheel <- as.factor(data_carprice$drivewheel)
+data_carprice$enginelocation <- as.factor(data_carprice$enginelocation)
+data_carprice$enginetype <- as.factor(data_carprice$enginetype)
+data_carprice$cylindernumber <- as.factor(data_carprice$cylindernumber)
+data_carprice$fuelsystem <- as.factor(data_carprice$fuelsystem)
+
+glimpse(data_carprice)
+
+```
+
 
 
 
