@@ -67,26 +67,33 @@ Please Note : The dataset provided is for learning purpose. Please don’t draw 
 - The dataset provided is for learning purpose. I can not draw any inference with real world scenario.    
     
 
-# 2. Statistical Methodology    
-**My objective:** Build a car price prediction model in the United States, using clustering analysis, principal component analysis, and linear regression model.  
+# 2. Develop an Analysis Plan   
+**My goal:** Build a car price prediction model in the United States, using clustering analysis, principal component analysis, and linear regression model.    
 
+**Major components of the course in your plan**   
+- Using GitHub to version control and document my project.   
+- Software: Applying R for data manipulation and analysis.    
+
+**Statistical Methodology**      
 **Data Wrangling**    
-• Data cleaning:    
+**• Data cleaning:**          
   - Load the dataset and examine their structure (e.g., variables, data types, unique values).     
   - Identify outliers, exclude duplicates, and correct inconsistent formatting.       
-•Descriptive analysis:   
+**•Descriptive analysis:**         
   - Calculate mean, median, minimum, maximum, variance, and standard deviation for continuous variables; calculate frequency and percentage for categorical variables.     
   - Identify trends or anomalies based on these statistics.       
-• Data Visualization:     
+**• Data Visualization: **        
   - Bar chart     
   - Histograms
   - Boxplot     
-  - Scatter plot      
-**Initial exploratory data analysis (EDA) to understand key features and relationship**          
-  - Correlation check   
+  - Scatter plot   
+**• Correlation check: scatter plots and Pearson correlation.**    
+  
+**Model building**  
+• **Initial exploratory data analysis (EDA) to understand key features and relationship**            
+  - Correlation check         
   - Univariable univariate analysis   
-**Model building**     
-• Split dataset: trainging data (70%) testing data (30%)    
+• Split dataset: trainging data (70%) testing data (30%)      
 • **Model 1: Linear regression** (supervised learning)    
 • **Model 2: Principal component analysis (PCA) + Linear regression** (unsupervised learning + supervised learning)      
   - Avoid multicollinearity among the features      
@@ -421,4 +428,188 @@ plot(bar_fuelsystem)
 ```
 Most cars's fuel type is gas (90.2%). Most cars used standard aspiration (82.0%).  Sedan and hatchback accout for 81.0% among all the car body types. 4WD only account for 4.4% among all the types of drive wheel. The majority of the engine location is at the front (98.5%). About 72.2% of the cars's engine type is ohc. About 77.6% of the cars have four cylinders.    
 
+
+**Histogram graphs for continuous variables:**    
+```{r}
+histo_price <- ggplot(data_carprice, aes(price)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_price)
+
+histo_wheelbase <- ggplot(data_carprice, aes(wheelbase)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_wheelbase)
+
+histo_carlength <- ggplot(data_carprice, aes(carlength)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_carlength)
+
+histo_carwidth <- ggplot(data_carprice, aes(carwidth)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_carwidth)
+
+histo_carheight <- ggplot(data_carprice, aes(carheight)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_carheight)
+
+histo_curbweight <- ggplot(data_carprice, aes(curbweight)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_curbweight)
+
+histo_enginesize <- ggplot(data_carprice, aes(enginesize)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_enginesize)
+
+histo_boreratio <- ggplot(data_carprice, aes(boreratio)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_boreratio)
+
+histo_stroke <- ggplot(data_carprice, aes(stroke)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_stroke)
+
+histo_compressionratio <- ggplot(data_carprice, aes(compressionratio)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_compressionratio)
+
+histo_horsepower <- ggplot(data_carprice, aes(horsepower)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_horsepower)
+
+histo_peakrpm <- ggplot(data_carprice, aes(peakrpm)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_peakrpm)
+
+histo_citympg <- ggplot(data_carprice, aes(citympg)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_citympg)
+
+histo_highwaympg <- ggplot(data_carprice, aes(highwaympg)) + 
+              geom_histogram(binwidth = 1)
+plot(histo_highwaympg)
+
+```  
+
+Based on the above histogram, I suspect none of the distribution of the above continuos variables is normal.    
+
+**Scatter plots for the outcome variable price and the continuous variables:**
+
+```{r}
+scatter_plot_price_wheelbase <- ggplot(data_carprice, aes(x = wheelbase, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "wheelbase", y = "price")
+plot(scatter_plot_price_wheelbase)
+
+scatter_plot_price_carlength <- ggplot(data_carprice, aes(x = carlength, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "carlength", y = "price")
+plot(scatter_plot_price_carlength)
+
+scatter_plot_price_carwidth <- ggplot(data_carprice, aes(x = carwidth, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "carwidth", y = "price")
+plot(scatter_plot_price_carwidth)
+
+scatter_plot_price_carheight <- ggplot(data_carprice, aes(x = carheight, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "carheight", y = "price")
+plot(scatter_plot_price_carheight)
+
+
+scatter_plot_price_curbweight <- ggplot(data_carprice, aes(x = curbweight, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "curbweight", y = "price")
+plot(scatter_plot_price_curbweight)
+
+
+scatter_plot_price_enginesize <- ggplot(data_carprice, aes(x = enginesize, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "enginesize", y = "price")
+plot(scatter_plot_price_enginesize)
+
+scatter_plot_price_boreratio <- ggplot(data_carprice, aes(x = boreratio, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "boreratio", y = "price")
+plot(scatter_plot_price_boreratio)
+
+scatter_plot_price_stroke <- ggplot(data_carprice, aes(x = stroke, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "stroke", y = "price")
+plot(scatter_plot_price_stroke)
+
+
+scatter_plot_price_compressionratio <- ggplot(data_carprice, aes(x = compressionratio, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "compressionratio", y = "price")
+plot(scatter_plot_price_compressionratio)
+
+
+scatter_plot_price_horsepower <- ggplot(data_carprice, aes(x = horsepower, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "horsepower", y = "price")
+plot(scatter_plot_price_horsepower)
+
+scatter_plot_price_peakrpm <- ggplot(data_carprice, aes(x = peakrpm, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "peakrpm", y = "price")
+plot(scatter_plot_price_peakrpm)
+
+
+scatter_plot_price_citympg <- ggplot(data_carprice, aes(x = citympg, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "citympg", y = "price")
+plot(scatter_plot_price_citympg)
+
+
+scatter_plot_price_highwaympg <- ggplot(data_carprice, aes(x = highwaympg, y = price)) + 
+                  geom_point(alpha=0.3) +
+                  geom_smooth(colour = "red") + 
+                  geom_smooth(method = "lm", colour = "#088da5") +
+                  labs(x = "highwaympg", y = "price")
+plot(scatter_plot_price_highwaympg)
+```  
+
+
+**Correlation check:**    
+
+```{r}
+data_carprice %>% 
+  correlate() %>%
+  rearrange() %>%
+  shave()  %>%
+  rplot(print_cor=TRUE) +
+  theme(axis.text.x = element_text(angle = 90))  
+```   
+
+
+From the scatter plots and the pearson correlation plot:    
+- outcome variable price is moderate positive correlated to car length,  boreratio of car, and weelbase of car.      
+- outcome variable price is strong positive correlated to car width, car weight, horse power, and engine size.         
+- outcome variable price is moderate negative correlated to mileage on highway and mileage in city.     
+This proivides evidence to include those variables in the model for linear regression model.      
+
+The multicollinearity was detected among those continuous variables, which provides rationals to conduct PCA to avoid multicollinearity.    
 
