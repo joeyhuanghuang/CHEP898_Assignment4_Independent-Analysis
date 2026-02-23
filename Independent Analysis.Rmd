@@ -106,7 +106,34 @@ Compare the three different machine learning method and select the best model
 
 
 # 3. Data Wrangling    
-```{r}
-
+**load the library **  
+**Import the can_path_data dataset**  
+```{r setup}
+library(tidyverse)
+library(tidymodels)
+library(reportRmd)
+library(sjPlot)
+library(plotly)
+library(psych)
+library(parallel)
+library(finalfit)
+library(gtsummary)
+library(mlbench)
+library(vip)
+library(rsample)
+library(tune)
+library(recipes)
+library(yardstick)
+library(parsnip)
+library(glmnet)
+library(themis)
+library(corrr)
+library(performance)
+library(utils)
+library(see)
+library(forestmodel)
+data_canpath<-read.csv("/Users/xiehuangbao/Library/CloudStorage/OneDrive-UniversityofSaskatchewan/Study at USask/CHEP898_Machine Learning/Assignment/Final assignment/CHEP898_Assignment4_Independent-Analysis/CarPrice_Assignment.csv")
 ```
+
+
 
