@@ -82,10 +82,10 @@ Please Note : The dataset provided is for learning purpose. Please don’t draw 
   - Histograms
   - Boxplot     
   - Scatter plot      
-**Potential variable selection**          
+**Initial exploratory data analysis (EDA) to understand key features and relationship**          
   - Correlation check   
   - Univariable univariate analysis   
-**Model building**    
+**Model building**     
 • Split dataset: trainging data (70%) testing data (30%)    
 • **Model 1: Linear regression** (supervised learning)    
 • **Model 2: Principal component analysis (PCA) + Linear regression** (unsupervised learning + supervised learning)      
@@ -141,7 +141,7 @@ glimpse(data_carprice)
 
 There are 26 columns, including ID and other 25 variables.      
 
-The total sample size is 205.     
+The total sample size is 205, which is one of the limitation. The sample size is not big.   
 
 
 ```{r}
@@ -206,6 +206,219 @@ glimpse(data_carprice)
 
 ```
 
+**Check whether there are outliers: **       
 
+```{r}
+boxplot <- ggplot(data_carprice, aes(price)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(wheelbase)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(carlength)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(carwidth)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(carheight)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(curbweight)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(enginesize)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(boreratio)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(stroke)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(compressionratio)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(horsepower)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(peakrpm)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(citympg)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+boxplot <- ggplot(data_carprice, aes(highwaympg)) + 
+              geom_boxplot() + 
+              coord_flip()  
+plot(boxplot)
+
+```
+
+Variables Price, Weelbase of car, Width of car,	Size of car, Stroke or volume inside the engine, Compression ratio of car, Horsepower, Car peak rpm, Mileage in city, Mileage on highway were identified with outliers. For example, output (outcome variable) price have some outlierw with high price.     
+
+
+**Calculate the descriptive statistics (frequency and percentage) for categorical variables**   
+
+```{r}
+symboling_table <- bind_rows(table(data_carprice$symboling), prop.table(table(data_carprice$symboling)))
+symboling_table
+CarName_table <- bind_rows(table(data_carprice$CarName), prop.table(table(data_carprice$CarName)))
+CarName_table
+fueltype_table <- bind_rows(table(data_carprice$fueltype), prop.table(table(data_carprice$fueltype)))
+fueltype_table
+aspiration_table <- bind_rows(table(data_carprice$aspiration), prop.table(table(data_carprice$aspiration)))
+aspiration_table
+doornumber_table <- bind_rows(table(data_carprice$doornumber), prop.table(table(data_carprice$doornumber)))
+doornumber_table
+carbody_table <- bind_rows(table(data_carprice$carbody), prop.table(table(data_carprice$carbody)))
+carbody_table
+drivewheel_table <- bind_rows(table(data_carprice$drivewheel), prop.table(table(data_carprice$drivewheel)))
+drivewheel_table
+enginelocation_table <- bind_rows(table(data_carprice$enginelocation), prop.table(table(data_carprice$enginelocation)))
+enginelocation_table
+enginetype_table <- bind_rows(table(data_carprice$enginetype), prop.table(table(data_carprice$enginetype)))
+enginetype_table
+cylindernumber_table <- bind_rows(table(data_carprice$cylindernumber), prop.table(table(data_carprice$cylindernumber)))
+cylindernumber_table
+fuelsystem_table <- bind_rows(table(data_carprice$fuelsystem), prop.table(table(data_carprice$fuelsystem)))
+fuelsystem_table
+
+```
+
+**Calculate the descriptive statistics for the continuous variables**. 
+```{r}
+summary(data_carprice$price)
+sd(data_carprice$price, na.rm = TRUE)
+summary(data_carprice$wheelbase)
+sd(data_carprice$wheelbase, na.rm = TRUE)
+summary(data_carprice$carlength)
+sd(data_carprice$carlength, na.rm = TRUE)
+summary(data_carprice$carwidth)
+sd(data_carprice$carwidth, na.rm = TRUE)
+summary(data_carprice$carheight)
+sd(data_carprice$carheight, na.rm = TRUE)
+summary(data_carprice$curbweight)
+sd(data_carprice$curbweight, na.rm = TRUE)
+summary(data_carprice$enginesize)
+sd(data_carprice$enginesize, na.rm = TRUE)
+summary(data_carprice$boreratio)
+sd(data_carprice$boreratio, na.rm = TRUE)
+summary(data_carprice$stroke)
+sd(data_carprice$stroke, na.rm = TRUE)
+summary(data_carprice$compressionratio)
+sd(data_carprice$compressionratio, na.rm = TRUE)
+summary(data_carprice$horsepower)
+sd(data_carprice$horsepower, na.rm = TRUE)
+summary(data_carprice$peakrpm)
+sd(data_carprice$peakrpm, na.rm = TRUE)
+summary(data_carprice$citympg)
+sd(data_carprice$citympg, na.rm = TRUE)
+summary(data_carprice$highwaympg)
+sd(data_carprice$highwaympg, na.rm = TRUE)
+```
+
+
+Output (outcome) variable has a wide price range from 5118 to 45400. 
+
+**Data Visualization**      
+
+**Bar graphs for categorical variables**    
+```{r}
+bar_symboling <- ggplot(data_carprice, aes(symboling)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "insurance risk rating") + 
+                theme(axis.text.x = element_text())       
+plot(bar_symboling)
+
+bar_CarName <- ggplot(data_carprice, aes(CarName)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "CarName") + 
+                theme(axis.text.x = element_text())       
+plot(bar_CarName)
+
+bar_fueltype <- ggplot(data_carprice, aes(fueltype)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "fuel type") + 
+                theme(axis.text.x = element_text())       
+plot(bar_fueltype)
+
+bar_aspiration <- ggplot(data_carprice, aes(aspiration)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "Aspiration used in a car") + 
+                theme(axis.text.x = element_text())       
+plot(bar_aspiration)
+
+bar_doornumber <- ggplot(data_carprice, aes(doornumber)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "door number") + 
+                theme(axis.text.x = element_text())       
+plot(bar_doornumber)
+
+bar_carbody <- ggplot(data_carprice, aes(carbody)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "car body") + 
+                theme(axis.text.x = element_text())       
+plot(bar_carbody)
+
+
+bar_drivewheel <- ggplot(data_carprice, aes(drivewheel)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "type of drive wheel") + 
+                theme(axis.text.x = element_text())       
+plot(bar_drivewheel)
+
+bar_enginelocation <- ggplot(data_carprice, aes(enginelocation)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "engine location") + 
+                theme(axis.text.x = element_text())       
+plot(bar_enginelocation)
+
+bar_enginetype <- ggplot(data_carprice, aes(enginetype)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "engine type") + 
+                theme(axis.text.x = element_text())       
+plot(bar_enginetype)
+
+bar_cylindernumber <- ggplot(data_carprice, aes(cylindernumber)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "cylinder number") + 
+                theme(axis.text.x = element_text())       
+plot(bar_cylindernumber)
+
+bar_fuelsystem <- ggplot(data_carprice, aes(fuelsystem)) + 
+                geom_bar(width=0.3) + 
+                labs(x = "fuelsystem") + 
+                theme(axis.text.x = element_text())       
+plot(bar_fuelsystem)
+
+```
+Most cars's fuel type is gas (90.2%). Most cars used standard aspiration (82.0%).  Sedan and hatchback accout for 81.0% among all the car body types. 4WD only account for 4.4% among all the types of drive wheel. The majority of the engine location is at the front (98.5%). About 72.2% of the cars's engine type is ohc. About 77.6% of the cars have four cylinders.    
 
 
